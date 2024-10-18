@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖👾👾🕹️🤖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Adjusted to ensure the form is visible */
+            height: 100vh;
+            background-color: #0a1f44;
+            font-family: Arial, sans-serif;
+            color: #e0f7fa;
+            padding-top: 20px; /* Added padding to make sure content starts lower */
+            box-sizing: border-box; /* Ensures padding is included in width calculations */
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #00e5ff;
+            margin-bottom: 2rem;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.079); /* Semi-transparent effect */
+            padding: 30px;
+            border-radius: 20px; /* Rounded corners for an iOS look */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            text-align: center;
+            width: 90%;  /* Responsive width */
+            max-width: 500px;  /* Set a max width for larger screens */
+            backdrop-filter: blur(10px); /* iOS-style blur effect */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #00e5ff;
+            background-color: transparent;
+            color: #00e5ff;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%; /* Make input fields take full width of the container */
+            box-sizing: border-box; /* Ensures padding is included in the input's width */
+        }
+        input[type="submit"] {
+            background-color: #00e5ff;
+            color: #0a1f44;
+            cursor: pointer;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        input[type="submit"]:hover {
+            background-color: #00b8d4;
+        }
+        input::placeholder {
+            color: #81d4fa;
+        }
+        .result-container {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #1de9b6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>FOREST FIRE PREDICTION TOOL</h1>
+        <form action="{{ url_for('predict_fires')}}" method="POST">
+            <label for="temperature">Temperature (°C)</label>
+            <input type="number" id="temperature" name="temperature" placeholder="Enter temperature" required>
+            
+            <label for="rh">Relative Humidity (%)</label>
+            <input type="number" id="rh" name="rh" placeholder="Enter RH" required>
+            
+            <label for="ws">Wind Speed (km/h)</label>
+            <input type="number" id="ws" name="ws" placeholder="Enter WS" required>
+            
+            <label for="rain">Rainfall (mm)</label>
+            <input type="number" id="rain" name="rain" placeholder="Enter Rain level" step="0.1" required>
+            
+            <label for="ffmc">FFMC</label>
+            <input type="number" id="ffmc" name="ffmc" placeholder="Enter FFMC value" step="0.1" required>
+            
+            <label for="dmc">DMC</label>
+            <input type="number" id="dmc" name="dmc" placeholder="Enter DMC value" step="0.1" required>
+            
+            <label for="isi">ISI</label>
+            <input type="number" id="isi" name="isi" placeholder="Enter ISI value" step="0.1" required>
+            
+            <label for="classes">Class</label>
+            <input type="text" id="classes" name="classes" placeholder="Enter Class" required>
+            
+            <label for="region">Region</label>
+            <input type="text" id="region" name="region" placeholder="Enter Region" required>
+            
+            <input type="submit" value="Submit">
+        </form>
+        <div class="result-container">
+            {% if results %}
+                The FWI Prediction is = {{ results }}
+            {% endif %}
+        </div>        
+    </div>
+</body>
+</html>
